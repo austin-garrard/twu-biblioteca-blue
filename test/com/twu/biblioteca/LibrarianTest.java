@@ -1,19 +1,27 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class LibrarianTest {
 
+    private Library library;
+    private WelcomeUser welcomeUser;
+    private Librarian librarian;
+
+
+    @Before
+    public void setup() {
+        library = mock(Library.class);
+        welcomeUser = mock(WelcomeUser.class);
+        librarian = new Librarian(library, welcomeUser);
+    }
+
     @Test
     public void shouldGreetUserWhenLibraryOpens() {
-        Library library = mock(Library.class);
-        WelcomeUser welcomeUser = mock(WelcomeUser.class);
-        Librarian librarian = new Librarian(library, welcomeUser);
-
         librarian.openLibrary();
 
         verify(welcomeUser).welcomeUser();
@@ -21,10 +29,6 @@ public class LibrarianTest {
 
     @Test
     public void shouldListBooksWhenLibraryOpens() {
-        Library library = mock(Library.class);
-        WelcomeUser welcomeUser = mock(WelcomeUser.class);
-        Librarian librarian = new Librarian(library, welcomeUser);
-
         librarian.openLibrary();
 
         verify(library).listBooks();
