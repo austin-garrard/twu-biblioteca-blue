@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verify;
 public class LibrarianTest {
 
     private Library library;
+    private Menu menu;
     private PrintStream printStream;
     private Librarian librarian;
 
@@ -18,8 +19,9 @@ public class LibrarianTest {
     @Before
     public void setup() {
         library = mock(Library.class);
+        menu = mock(Menu.class);
         printStream = mock(PrintStream.class);
-        librarian = new Librarian(library, printStream);
+        librarian = new Librarian(library, menu, printStream);
     }
 
     @Test
@@ -29,10 +31,10 @@ public class LibrarianTest {
         verify(printStream).println("Welcome, user!");
     }
 
-    @Test
-    public void shouldListBooksWhenLibraryOpens() {
-        librarian.openLibrary();
 
-        verify(library).bookList();
+    @Test
+    public void shouldLaunchMenuWhenLibraryOpens() {
+        librarian.openLibrary();
+        verify(menu).launch();
     }
 }
