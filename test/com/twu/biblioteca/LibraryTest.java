@@ -34,7 +34,7 @@ public class LibraryTest {
 
         library.listBooks();
 
-        verify(bookOne).listDetails();
+        verify(bookOne).printDetails();
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LibraryTest {
 
         library.listBooks();
 
-        verify(bookOne).listDetails();
+        verify(bookOne).printDetails();
     }
 
     @Test
@@ -54,6 +54,6 @@ public class LibraryTest {
 
         library.listBooks();
 
-        verify(bookTwo).listDetails();
+        verify(bookTwo).printDetails();
     }
 }

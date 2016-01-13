@@ -11,7 +11,7 @@ public class Library {
 
     public void listBooks() {
         for (Book book: books) {
-            book.listDetails();
+            book.printDetails();
         }
     }
 }

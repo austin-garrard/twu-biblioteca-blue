@@ -18,7 +18,15 @@ public class Book {
         this.printStream = printStream;
     }
 
-    public void listDetails() {
-        printStream.println(title + "\t" + author + "\t" + year);
+    public void printDetails() {
+        printStream.println(formattedDetails());
+    }
+
+
+    public String formattedDetails() {
+        BookFormatter formatter = new BookFormatter();
+        String formattedDetails = formatter.formatSubstring(title, 25) + formatter.formatSubstring(author, 25) + formatter.formatSubstring(year, 4);
+
+        return formattedDetails;
     }
 }
