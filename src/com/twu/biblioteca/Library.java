@@ -1,8 +1,5 @@
 package com.twu.biblioteca;
 
-import com.sun.deploy.util.StringUtils;
-
-import java.io.PrintStream;
 import java.util.List;
 
 public class Library {
