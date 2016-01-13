@@ -13,22 +13,12 @@ import static org.mockito.Mockito.verify;
 
 public class BookTest {
 
-    private PrintStream printStream;
     private Book book;
 
     @Before
     public void setup() {
 
-        printStream = mock(PrintStream.class);
-        book = new Book("Dracula", "Bram Stoker", "1875", printStream);
-    }
-
-    @Test
-    public void shouldPrintBookInformationWhenPrintDetailsIsCalled() {
-
-        book.printDetails();
-        verify(printStream).println(contains("Dracula"));
-
+        book = new Book("Dracula", "Bram Stoker", "1875");
     }
 
     @Test
@@ -38,7 +28,7 @@ public class BookTest {
 
     @Test
     public void shouldIncludeTruncatedTitleInFormattedDetailsWhenTitleIsLongerThan25Chars(){
-        Book longBook = new Book("A Really Way Too Long Title That Is Too Much", "Natalie", "1874", printStream);
+        Book longBook = new Book("A Really Way Too Long Title That Is Too Much", "Natalie", "1874");
         assertThat(longBook.formattedDetails(), containsString("A Really Way Too Long Tit..."));
     }
 

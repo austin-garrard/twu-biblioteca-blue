@@ -9,9 +9,13 @@ public class Library {
         this.books = books;
     }
 
-    public void listBooks() {
+    public String bookList() {
+        String bookList = "";
+
         for (Book book: books) {
-            book.printDetails();
+            bookList += book.formattedDetails() + "\n";
         }
+
+        return bookList;
     }
 }

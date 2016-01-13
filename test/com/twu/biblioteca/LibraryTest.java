@@ -29,31 +29,22 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldPrintOneBooksWhenOnlyOneBook() {
+    public void shouldReturnOneFormattedBooksStringWhenOnlyOneBook() {
         books.add(bookOne);
 
-        library.listBooks();
+        library.bookList();
 
-        verify(bookOne).printDetails();
+        verify(bookOne).formattedDetails();
     }
 
+
     @Test
-    public void shouldPrintFirstBookWhenMultipleBooksExist() {
+    public void shouldReturnSecondFormattedBookWhenMultipleBooksExist() {
         books.add(bookOne);
         books.add(bookTwo);
 
-        library.listBooks();
+        library.bookList();
 
-        verify(bookOne).printDetails();
-    }
-
-    @Test
-    public void shouldPrintSecondBookWhenMultipleBooksExist() {
-        books.add(bookOne);
-        books.add(bookTwo);
-
-        library.listBooks();
-
-        verify(bookTwo).printDetails();
+        verify(bookTwo).formattedDetails();
     }
 }

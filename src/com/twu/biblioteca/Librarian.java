@@ -1,16 +1,18 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
+
 public class Librarian {
     private Library library;
-    private WelcomeUser welcomeUser;
+    private PrintStream printStream;
 
-    public Librarian(Library library, WelcomeUser welcomeUser) {
+    public Librarian(Library library, PrintStream printStream) {
         this.library = library;
-        this.welcomeUser = welcomeUser;
+        this.printStream = printStream;
     }
 
     public void openLibrary() {
-        welcomeUser.welcomeUser();
-//        library.listBooks();
+        printStream.println("Welcome, user!");
+        printStream.println(library.bookList());
     }
 }

@@ -9,19 +9,12 @@ public class Book {
     private String title;
     private String author;
     private String year;
-    private PrintStream printStream;
 
-    public Book(String title, String author, String year, PrintStream printStream) {
+    public Book(String title, String author, String year) {
         this.title = title;
         this.author = author;
         this.year = year;
-        this.printStream = printStream;
     }
-
-    public void printDetails() {
-        printStream.println(formattedDetails());
-    }
-
 
     public String formattedDetails() {
         BookFormatter formatter = new BookFormatter();
