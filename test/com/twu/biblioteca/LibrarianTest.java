@@ -33,5 +33,4 @@ public class LibrarianTest {
 
         verify(library).listBooks();
     }
-
 }

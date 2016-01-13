@@ -9,6 +9,7 @@ public class WelcomeUser {
     public WelcomeUser(PrintStream printStream){
         this.printStream = printStream;
     }
+
     public void welcomeUser() {
         printStream.println("Welcome, user!");
     }

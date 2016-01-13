@@ -13,32 +13,47 @@ import static org.mockito.Mockito.verify;
 public class LibraryTest {
 
     PrintStream printStream;
-    List<String> books;
+    List<Book> books;
     Library library;
+    Book bookOne;
+    Book bookTwo;
 
     @Before
     public void setup() {
         printStream = mock(PrintStream.class);
-        books = new ArrayList<String>();
-        library = new Library(books, printStream);
+        bookOne = mock(Book.class);
+        bookTwo = mock(Book.class);
+
+        books = new ArrayList<Book>();
+        library = new Library(books);
     }
 
     @Test
     public void shouldPrintOneBooksWhenOnlyOneBook() {
-        books.add("Moby Dick");
+        books.add(bookOne);
 
         library.listBooks();
 
-        verify(printStream).println("Moby Dick");
+        verify(bookOne).listDetails();
     }
 
     @Test
-    public void shouldPrintAllBooksWhenMultipleBooks() {
-        books.add("Moby Dick");
-        books.add("Count of Monte Cristo");
+    public void shouldPrintFirstBookWhenMultipleBooksExist() {
+        books.add(bookOne);
+        books.add(bookTwo);
 
         library.listBooks();
 
-        verify(printStream).println("Moby Dick\nCount of Monte Cristo");
+        verify(bookOne).listDetails();
+    }
+
+    @Test
+    public void shouldPrintSecondBookWhenMultipleBooksExist() {
+        books.add(bookOne);
+        books.add(bookTwo);
+
+        library.listBooks();
+
+        verify(bookTwo).listDetails();
     }
 }
