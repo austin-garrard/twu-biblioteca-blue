@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -8,11 +10,15 @@ public class Menu {
 
     private List<String> options;
     private PrintStream printStream;
+    private BufferedReader bufferedReader;
 
-    public Menu(List<String> options, PrintStream printStream) {
+    public Menu(Library library, List<String> options,
+                PrintStream printStream,
+                BufferedReader bufferedReader) {
 
         this.options = options;
         this.printStream = printStream;
+        this.bufferedReader = bufferedReader;
     }
 
     public void launch() {
@@ -21,14 +27,21 @@ public class Menu {
     }
 
     private void displayOptions() {
-        for (int i = 0; i < options.size(); i++) {
-            String option = options.get(i);
-            int optionNum = i + 1;
+        int optionNum = 1;
+
+        for (String option : options) {
             printStream.println("[" + optionNum + "] " + option);
+            optionNum++;
         }
     }
 
     public void prompt(String phrase) {
         printStream.println(phrase);
+
+        try {
+            bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

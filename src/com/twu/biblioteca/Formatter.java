@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class BookFormatter {
+public class Formatter {
 
     public String formatSubstring(String substring, int limit) {
 

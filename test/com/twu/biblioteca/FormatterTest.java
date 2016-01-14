@@ -6,26 +6,26 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class BookFormatterTest {
+public class FormatterTest {
 
-    private BookFormatter bookFormatter;
+    private Formatter formatter;
 
     @Before
     public void setup() {
 
-        bookFormatter = new BookFormatter();
+        formatter = new Formatter();
     }
 
     @Test
     public void shouldTruncateStringWhenStringGreaterThanLimit() {
-        String formattedBook = bookFormatter.formatSubstring("Harry Potter and the Sorcerer's Stone", 25);
+        String formattedBook = formatter.formatSubstring("Harry Potter and the Sorcerer's Stone", 25);
        assertThat(formattedBook, is("Harry Potter and the Sorc...  "));
     }
 
     @Test
     public void shouldTruncateStringWhenStringLessThanLimit() {
 
-        String formattedBook = bookFormatter.formatSubstring("Dracula", 25);
+        String formattedBook = formatter.formatSubstring("Dracula", 25);
         assertThat(formattedBook, is("Dracula                       "));
     }
 

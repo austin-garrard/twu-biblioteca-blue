@@ -3,6 +3,8 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +15,21 @@ import static org.mockito.Mockito.verify;
 
 public class MenuTest {
 
-    private PrintStream testStream;
-    private List testOptions;
     private Menu menu;
+    private Library testLibrary;
+    private List testOptions;
+    private PrintStream testStream;
+    private BufferedReader testReader;
 
     @Before
     public void setup() {
 
+        testLibrary = mock(Library.class);
+        testOptions = new ArrayList<>();
         testStream = mock(PrintStream.class);
-        testOptions = new ArrayList<String>();
-        menu = new Menu(testOptions, testStream);
+        testReader = mock(BufferedReader.class);
+
+        menu = new Menu(testLibrary, testOptions, testStream, testReader);
     }
 
     @Test
@@ -57,5 +64,19 @@ public class MenuTest {
         menu.prompt("Type Something:");
 
         verify(testStream).println("Type Something:");
+    }
+
+    @Test
+    public void shouldReadUserInputAfterPrompt() throws IOException {
+        menu.prompt("Select an option");
+
+        verify(testReader).readLine();
+    }
+
+    @Test
+    public void shouldListBooksWhenFirstOptionSelected() {
+        menu.selectOption(1);
+
+        verify(testLibrary).displayBooks;
     }
 }

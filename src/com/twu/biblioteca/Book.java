@@ -1,10 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
-
-/**
- * Created by smitchell on 1/13/16.
- */
 public class Book {
     private String title;
     private String author;
@@ -17,7 +12,7 @@ public class Book {
     }
 
     public String formattedDetails() {
-        BookFormatter formatter = new BookFormatter();
+        Formatter formatter = new Formatter();
         String formattedDetails = formatter.formatSubstring(title, 25) + formatter.formatSubstring(author, 25) + formatter.formatSubstring(year, 4);
 
         return formattedDetails;
