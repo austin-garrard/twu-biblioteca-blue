@@ -9,15 +9,23 @@ public class Main {
         List<Book> books = bookList();
 
         Library library = new Library(books);
-        Librarian librarian = new Librarian(library, System.out);
+        Menu menu = new Menu(menuOptions(), System.out);
+        Librarian librarian = new Librarian(library, menu, System.out);
 
         librarian.openLibrary();
     }
 
     private static List<Book> bookList() {
-        List<Book> books = new ArrayList<Book>();
+        List<Book> books = new ArrayList<>();
         books.add(new Book("Dracula", "Bram Stoker", "1875"));
         books.add(new Book("Moby Dick", "Sherman Melville", "1890"));
         return books;
+    }
+
+    private static List<String> menuOptions() {
+        List<String> menuOptions = new ArrayList<>();
+        menuOptions.add("A) List Book");
+
+        return menuOptions;
     }
 }
