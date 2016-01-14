@@ -16,6 +16,5 @@ public class Librarian {
     public void openLibrary() {
         printStream.println("Welcome, user!");
         menu.launch();
-        printStream.println("Menu: [1] Display Books");
     }
 }

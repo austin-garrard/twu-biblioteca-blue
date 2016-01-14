@@ -24,7 +24,7 @@ public class Main {
 
     private static List<String> menuOptions() {
         List<String> menuOptions = new ArrayList<>();
-        menuOptions.add("A) List Book");
+        menuOptions.add("List Books");
 
         return menuOptions;
     }
