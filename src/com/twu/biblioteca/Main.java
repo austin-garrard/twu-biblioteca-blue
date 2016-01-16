@@ -23,9 +23,9 @@ public class Main {
         commandMap.put(1, new ListBooksCommand(library));
         commandMap.put(2, new QuitCommand(applicationState));
 
-        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap, applicationState);
+        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap);
 
-        Librarian librarian = new Librarian(library, menu, printStream);
+        Librarian librarian = new Librarian(library, menu, printStream, applicationState);
 
         librarian.openLibrary();
     }

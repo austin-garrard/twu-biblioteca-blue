@@ -6,15 +6,20 @@ public class Librarian {
     private Library library;
     private Menu menu;
     private PrintStream printStream;
+    private ApplicationState applicationState;
 
-    public Librarian(Library library, Menu menu, PrintStream printStream) {
+    public Librarian(Library library, Menu menu, PrintStream printStream, ApplicationState applicationState) {
         this.library = library;
         this.menu = menu;
         this.printStream = printStream;
+        this.applicationState = applicationState;
     }
 
     public void openLibrary() {
         printStream.println("Welcome, user!");
-        menu.launch();
+
+        while (applicationState.isActive()) {
+            menu.launch();
+        }
     }
 }

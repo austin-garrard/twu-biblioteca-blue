@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class LibrarianTest {
 
@@ -14,6 +13,7 @@ public class LibrarianTest {
     private Menu menu;
     private PrintStream printStream;
     private Librarian librarian;
+    private ApplicationState applicationState;
 
 
     @Before
@@ -21,7 +21,9 @@ public class LibrarianTest {
         library = mock(Library.class);
         menu = mock(Menu.class);
         printStream = mock(PrintStream.class);
-        librarian = new Librarian(library, menu, printStream);
+        applicationState = mock(ApplicationState.class);
+        when(applicationState.isActive()).thenReturn(true).thenReturn(false);
+        librarian = new Librarian(library, menu, printStream, applicationState);
     }
 
     @Test
@@ -31,10 +33,16 @@ public class LibrarianTest {
         verify(printStream).println("Welcome, user!");
     }
 
-
     @Test
-    public void shouldLaunchMenuWhenLibraryOpens() {
+    public void shouldLaunchMenuWhenLibraryIsOpen() {
         librarian.openLibrary();
         verify(menu).launch();
+    }
+
+    @Test
+    public void shouldNotLaunchMenuWhenLibraryIsClosed() {
+        when(applicationState.isActive()).thenReturn(false);
+        librarian.openLibrary();
+        verify(menu, times(0)).launch();
     }
 }

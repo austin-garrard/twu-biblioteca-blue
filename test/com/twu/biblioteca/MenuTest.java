@@ -19,7 +19,6 @@ public class MenuTest {
     private PrintStream testStream;
     private InputReader inputReader;
     private Map<Integer, Command> commandMap;
-    private ApplicationState applicationState;
 
 
     @Before
@@ -28,10 +27,8 @@ public class MenuTest {
         testStream = mock(PrintStream.class);
         inputReader = mock(InputReader.class);
         commandMap = new HashMap<>();
-        applicationState = mock(ApplicationState.class);
-        when(applicationState.isActive()).thenReturn(true).thenReturn(false);
 
-        menu = new Menu(testOptions, testStream, inputReader, commandMap, applicationState);
+        menu = new Menu(testOptions, testStream, inputReader, commandMap);
     }
 
 
@@ -86,44 +83,4 @@ public class MenuTest {
 
         verify(testStream).println("Select a valid option!");
     }
-
-    @Test
-    public void shouldNotDisplayOptionsWhenNotActive() {
-        when(applicationState.isActive()).thenReturn(false);
-
-        menu.launch();
-
-        verify(testStream, times(0)).println(anyString());
-    }
-
-    @Test
-    public void shouldNotReadInputWhenNotActive() {
-        when(applicationState.isActive()).thenReturn(false);
-
-        menu.launch();
-
-        verify(inputReader, times(0)).read();
-    }
-
-    @Test
-    public void shouldNotDisplayMessageForInvalidCommandWhenNotActive() {
-        when(applicationState.isActive()).thenReturn(false);
-
-        menu.launch();
-
-        verify(testStream, times(0)).println(anyString());
-    }
-
-    @Test
-    public void shouldNotExecuteCommandWhenNotActive() {
-        when(applicationState.isActive()).thenReturn(false);
-        when(inputReader.read()).thenReturn(1);
-        ListBooksCommand listBooksCommand = mock(ListBooksCommand.class);
-        commandMap.put(1, listBooksCommand);
-
-        menu.launch();
-
-        verify(listBooksCommand, times(0)).execute();
-    }
-
 }
