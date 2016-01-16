@@ -15,11 +15,15 @@ public class Main {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         Library library = new Library(bookList(), printStream);
-        Map<Integer, Command> commandMap = new HashMap<>();
-        commandMap.put(1, new ListBooksCommand(library));
+
 
         InputReader inputReader = new InputReader(bufferedReader);
-        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap);
+        ApplicationState applicationState = new ApplicationState();
+        Map<Integer, Command> commandMap = new HashMap<>();
+        commandMap.put(1, new ListBooksCommand(library));
+        commandMap.put(2, new QuitCommand(applicationState));
+
+        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap, applicationState);
 
         Librarian librarian = new Librarian(library, menu, printStream);
 
