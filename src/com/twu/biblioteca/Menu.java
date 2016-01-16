@@ -43,7 +43,14 @@ public class Menu {
     }
 
     public void selectOption(int option) {
-        library.bookList();
+        switch (option) {
+            case 1:
+                library.bookList();
+                break;
+            default:
+                printStream.println("Select a valid option!");
+        }
+
     }
 
 }

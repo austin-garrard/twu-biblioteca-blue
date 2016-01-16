@@ -90,4 +90,11 @@ public class MenuTest {
 
         verify(testLibrary).bookList();
     }
+
+    @Test
+    public void shouldDisplayMessageWhenSelectingInvalidOption() {
+        menu.selectOption(-20);
+
+        verify(testStream).println("Select a valid option!");
+    }
 }
