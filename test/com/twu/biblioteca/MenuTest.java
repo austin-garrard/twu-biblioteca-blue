@@ -76,6 +76,12 @@ public class MenuTest {
         verify(inputReader).read();
     }
 
+    @Test
+    public void shouldExecuteOptionWhenLaunching() {
+        menu.launch();
+
+        verify(testLibrary).bookList();
+    }
 
 
     @Test

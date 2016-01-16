@@ -26,7 +26,7 @@ public class Menu {
         displayOptions();
         prompt("Please select an option.");
         int option = inputReader.read();
-        //selectOption(option);
+        selectOption(option);
     }
 
     private void displayOptions() {
