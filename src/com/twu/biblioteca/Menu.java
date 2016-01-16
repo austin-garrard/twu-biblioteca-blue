@@ -1,29 +1,32 @@
 package com.twu.biblioteca;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
 public class Menu {
 
 
+    private Library library;
     private List<String> options;
     private PrintStream printStream;
-    private BufferedReader bufferedReader;
+    private InputReader inputReader;
 
     public Menu(Library library, List<String> options,
                 PrintStream printStream,
-                BufferedReader bufferedReader) {
+                InputReader inputReader) {
+        this.library = library;
 
         this.options = options;
         this.printStream = printStream;
-        this.bufferedReader = bufferedReader;
+        this.inputReader = inputReader;
     }
 
     public void launch() {
         displayOptions();
         prompt("Please select an option.");
+        int option = inputReader.read();
+        //selectOption(option);
     }
 
     private void displayOptions() {
@@ -37,11 +40,10 @@ public class Menu {
 
     public void prompt(String phrase) {
         printStream.println(phrase);
-
-        try {
-            bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
+
+    public void selectOption(int option) {
+        library.bookList();
+    }
+
 }

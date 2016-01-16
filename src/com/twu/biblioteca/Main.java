@@ -12,7 +12,8 @@ public class Main {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Library library = new Library(books, System.out);
-        Menu menu = new Menu(library, menuOptions(), System.out, bufferedReader);
+        InputReader inputReader = new InputReader(bufferedReader);
+        Menu menu = new Menu(library, menuOptions(), System.out, inputReader);
         Librarian librarian = new Librarian(library, menu, System.out);
 
         librarian.openLibrary();

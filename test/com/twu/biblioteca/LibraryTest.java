@@ -22,9 +22,9 @@ public class LibraryTest {
     public void setup() {
         printStream = mock(PrintStream.class);
         bookOne = mock(Book.class);
-        bookTwo = mock(Book.class);``
+        bookTwo = mock(Book.class);
 
-        books = new ArrayList<Book>();
+        books = new ArrayList<>();
         library = new Library(books, printStream);
     }
 

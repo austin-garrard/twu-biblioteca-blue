@@ -4,11 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,9 +18,10 @@ public class MenuTest {
 
     private Menu menu;
     private Library testLibrary;
-    private List testOptions;
+    private List<String> testOptions;
     private PrintStream testStream;
     private BufferedReader testReader;
+    private InputReader inputReader;
 
     @Before
     public void setup() {
@@ -28,8 +30,9 @@ public class MenuTest {
         testOptions = new ArrayList<>();
         testStream = mock(PrintStream.class);
         testReader = mock(BufferedReader.class);
+        inputReader = mock(InputReader.class);
 
-        menu = new Menu(testLibrary, testOptions, testStream, testReader);
+        menu = new Menu(testLibrary, testOptions, testStream, inputReader);
     }
 
     @Test
@@ -67,16 +70,18 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldReadUserInputAfterPrompt() throws IOException {
-        menu.prompt("Select an option");
+    public void shouldReadInputWhenLaunching() {
+        menu.launch();
 
-        verify(testReader).readLine();
+        verify(inputReader).read();
     }
+
+
 
     @Test
     public void shouldListBooksWhenFirstOptionSelected() {
         menu.selectOption(1);
 
-        verify(testLibrary).displayBooks;
+        verify(testLibrary).bookList();
     }
 }
