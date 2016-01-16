@@ -7,14 +7,11 @@ import java.util.Map;
 public class Menu {
 
     private Map<Integer, Command> commandMap;
-    private List<String> options;
     private PrintStream printStream;
     private InputReader inputReader;
 
-    public Menu(List<String> options,
-                PrintStream printStream,
+    public Menu(PrintStream printStream,
                 InputReader inputReader, Map<Integer, Command> commandMap) {
-        this.options = options;
         this.printStream = printStream;
         this.inputReader = inputReader;
         this.commandMap = commandMap;
@@ -36,11 +33,8 @@ public class Menu {
     }
 
     private void displayOptions() {
-        int optionNum = 1;
-
-        for (String option : options) {
-            printStream.println("[" + optionNum + "] " + option);
-            optionNum++;
+        for (Integer key : commandMap.keySet()) {
+            printStream.println("[" + key + "] " + commandMap.get(key).getName());
         }
 
         printStream.println("Please select an option.");

@@ -15,36 +15,35 @@ import static org.mockito.Mockito.*;
 public class MenuTest {
 
     private Menu menu;
-    private List<String> testOptions;
     private PrintStream testStream;
     private InputReader inputReader;
     private Map<Integer, Command> commandMap;
+    private Command command;
 
 
     @Before
     public void setup() {
-        testOptions = new ArrayList<>();
         testStream = mock(PrintStream.class);
         inputReader = mock(InputReader.class);
         commandMap = new HashMap<>();
 
-        menu = new Menu(testOptions, testStream, inputReader, commandMap);
+        menu = new Menu(testStream, inputReader, commandMap);
+        command = mock(Command.class);
     }
 
 
     @Test
     public void shouldDisplayOptionsAtLaunch() {
-        testOptions.add("Option 1");
+        commandMap.put(1, command);
+        when(command.getName()).thenReturn("Some Name");
 
         menu.launch();
 
-        verify(testStream).println(contains("Option 1"));
+        verify(testStream).println(contains("Some Name"));
     }
 
     @Test
     public void shouldPromptUserToSelectAnOptionAtLaunch() {
-        testOptions.add("Option 1");
-
         menu.launch();
 
         verify(testStream).println(contains("Please select an option."));
@@ -52,11 +51,12 @@ public class MenuTest {
 
     @Test
     public void shouldEnumerateOptionsWhenDisplayingThem() {
-        testOptions.add("Some option");
+        commandMap.put(1, command);
+        when(command.getName()).thenReturn("Some Name");
 
         menu.launch();
 
-        verify(testStream).println("[1] Some option");
+        verify(testStream).println("[1] Some Name");
     }
 
     @Test

@@ -20,10 +20,10 @@ public class Main {
         InputReader inputReader = new InputReader(bufferedReader);
         ApplicationState applicationState = new ApplicationState();
         Map<Integer, Command> commandMap = new HashMap<>();
-        commandMap.put(1, new ListBooksCommand(library));
-        commandMap.put(2, new QuitCommand(applicationState));
+        commandMap.put(1, new ListBooksCommand("List Books", library));
+        commandMap.put(2, new QuitCommand("Quit", applicationState));
 
-        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap);
+        Menu menu = new Menu(printStream, inputReader, commandMap);
 
         Librarian librarian = new Librarian(library, menu, printStream, applicationState);
 
@@ -35,12 +35,5 @@ public class Main {
         books.add(new Book("Dracula", "Bram Stoker", "1875"));
         books.add(new Book("Moby Dick", "Sherman Melville", "1890"));
         return books;
-    }
-
-    private static List<String> menuOptions() {
-        List<String> menuOptions = new ArrayList<>();
-        menuOptions.add("List Books");
-
-        return menuOptions;
     }
 }
