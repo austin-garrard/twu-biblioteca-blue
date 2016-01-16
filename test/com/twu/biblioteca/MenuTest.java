@@ -5,12 +5,14 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuTest {
 
@@ -18,16 +20,16 @@ public class MenuTest {
     private List<String> testOptions;
     private PrintStream testStream;
     private InputReader inputReader;
-    private Option option;
+    private Map<Integer, Command> commandMap;
 
     @Before
     public void setup() {
         testOptions = new ArrayList<>();
         testStream = mock(PrintStream.class);
         inputReader = mock(InputReader.class);
-        option = mock(Option.class);
+        commandMap = new HashMap<>();
 
-        menu = new Menu(testOptions, testStream, inputReader, option);
+        menu = new Menu(testOptions, testStream, inputReader, commandMap);
     }
 
     @Test
@@ -72,9 +74,21 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldExecuteOptionWhenLaunching() {
+    public void shouldExecuteValidOptionWhenLaunching() {
+        when(inputReader.read()).thenReturn(1);
+        ListBooksCommand listBooksCommand = mock(ListBooksCommand.class);
+        commandMap.put(1, listBooksCommand);
+
         menu.launch();
 
-        verify(option).select(anyInt());
+        verify(listBooksCommand).execute();
     }
+
+    @Test
+    public void shouldDisplayMessageWhenSelectingInvalidOption() {
+        menu.launch();
+
+        verify(testStream).println("Select a valid option!");
+    }
+
 }

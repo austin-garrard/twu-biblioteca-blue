@@ -2,20 +2,26 @@ package com.twu.biblioteca;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
-        List<Book> books = bookList();
-
+        PrintStream printStream = System.out;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Library library = new Library(books, System.out);
+
+        Library library = new Library(bookList(), printStream);
+        Map<Integer, Command> commandMap = new HashMap<>();
+        commandMap.put(1, new ListBooksCommand(library));
+
         InputReader inputReader = new InputReader(bufferedReader);
-        Option option = new Option(library, System.out);
-        Menu menu = new Menu(menuOptions(), System.out, inputReader, option);
-        Librarian librarian = new Librarian(library, menu, System.out);
+        Menu menu = new Menu(menuOptions(), printStream, inputReader, commandMap);
+
+        Librarian librarian = new Librarian(library, menu, printStream);
 
         librarian.openLibrary();
     }
