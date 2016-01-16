@@ -3,13 +3,11 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,22 +15,19 @@ import static org.mockito.Mockito.verify;
 public class MenuTest {
 
     private Menu menu;
-    private Library testLibrary;
     private List<String> testOptions;
     private PrintStream testStream;
-    private BufferedReader testReader;
     private InputReader inputReader;
+    private Option option;
 
     @Before
     public void setup() {
-
-        testLibrary = mock(Library.class);
         testOptions = new ArrayList<>();
         testStream = mock(PrintStream.class);
-        testReader = mock(BufferedReader.class);
         inputReader = mock(InputReader.class);
+        option = mock(Option.class);
 
-        menu = new Menu(testLibrary, testOptions, testStream, inputReader);
+        menu = new Menu(testOptions, testStream, inputReader, option);
     }
 
     @Test
@@ -80,21 +75,6 @@ public class MenuTest {
     public void shouldExecuteOptionWhenLaunching() {
         menu.launch();
 
-        verify(testLibrary).bookList();
-    }
-
-
-    @Test
-    public void shouldListBooksWhenFirstOptionSelected() {
-        menu.selectOption(1);
-
-        verify(testLibrary).bookList();
-    }
-
-    @Test
-    public void shouldDisplayMessageWhenSelectingInvalidOption() {
-        menu.selectOption(-20);
-
-        verify(testStream).println("Select a valid option!");
+        verify(option).select(anyInt());
     }
 }

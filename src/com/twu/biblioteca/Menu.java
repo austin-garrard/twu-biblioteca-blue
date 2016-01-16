@@ -1,32 +1,30 @@
 package com.twu.biblioteca;
 
-import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.List;
 
 public class Menu {
 
 
-    private Library library;
+    private final Option option;
     private List<String> options;
     private PrintStream printStream;
     private InputReader inputReader;
 
-    public Menu(Library library, List<String> options,
+    public Menu(List<String> options,
                 PrintStream printStream,
-                InputReader inputReader) {
-        this.library = library;
-
+                InputReader inputReader, Option option) {
         this.options = options;
         this.printStream = printStream;
         this.inputReader = inputReader;
+        this.option = option;
     }
 
     public void launch() {
         displayOptions();
         prompt("Please select an option.");
-        int option = inputReader.read();
-        selectOption(option);
+        int optionNumber = inputReader.read();
+        option.select(optionNumber);
     }
 
     private void displayOptions() {
@@ -41,16 +39,4 @@ public class Menu {
     public void prompt(String phrase) {
         printStream.println(phrase);
     }
-
-    public void selectOption(int option) {
-        switch (option) {
-            case 1:
-                library.bookList();
-                break;
-            default:
-                printStream.println("Select a valid option!");
-        }
-
-    }
-
 }
