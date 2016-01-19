@@ -1,5 +1,9 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.command.Command;
+import com.twu.biblioteca.command.ListBooksCommand;
+import com.twu.biblioteca.command.QuitCommand;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -25,7 +29,7 @@ public class Main {
 
         Menu menu = new Menu(printStream, inputReader, commandMap);
 
-        Librarian librarian = new Librarian(library, menu, printStream, applicationState);
+        Librarian librarian = new Librarian(menu, printStream, applicationState);
 
         librarian.openLibrary();
     }

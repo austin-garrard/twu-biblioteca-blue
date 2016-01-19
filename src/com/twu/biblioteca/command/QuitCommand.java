@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.command;
+
+import com.twu.biblioteca.ApplicationState;
 
 public class QuitCommand extends Command {
     private ApplicationState applicationState;

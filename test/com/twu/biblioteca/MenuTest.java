@@ -1,12 +1,12 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.command.Command;
+import com.twu.biblioteca.command.ListBooksCommand;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Matchers.contains;

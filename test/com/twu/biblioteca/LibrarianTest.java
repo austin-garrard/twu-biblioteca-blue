@@ -23,7 +23,7 @@ public class LibrarianTest {
         printStream = mock(PrintStream.class);
         applicationState = mock(ApplicationState.class);
         when(applicationState.isActive()).thenReturn(true).thenReturn(false);
-        librarian = new Librarian(library, menu, printStream, applicationState);
+        librarian = new Librarian(menu, printStream, applicationState);
     }
 
     @Test

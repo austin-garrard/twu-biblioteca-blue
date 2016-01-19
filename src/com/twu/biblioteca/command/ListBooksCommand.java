@@ -1,6 +1,9 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.command;
 
-public class ListBooksCommand extends Command{
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.command.Command;
+
+public class ListBooksCommand extends Command {
 
     private Library library;
 
