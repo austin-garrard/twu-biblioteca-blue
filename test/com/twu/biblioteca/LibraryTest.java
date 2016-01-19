@@ -7,8 +7,11 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class LibraryTest {
 
@@ -17,15 +20,17 @@ public class LibraryTest {
     Library library;
     Book bookOne;
     Book bookTwo;
+    private InputReader inputReader;
 
     @Before
     public void setup() {
         printStream = mock(PrintStream.class);
+        inputReader = mock(InputReader.class);
         bookOne = mock(Book.class);
         bookTwo = mock(Book.class);
 
         books = new ArrayList<>();
-        library = new Library(books, printStream);
+        library = new Library(books, printStream, inputReader);
     }
 
     @Test
@@ -46,5 +51,27 @@ public class LibraryTest {
         library.bookList();
 
         verify(bookTwo).formattedDetails();
+    }
+
+
+
+    @Test
+    public void shouldCheckoutBookWhenSingleBook() {
+        books.add(bookOne);
+
+        library.checkoutBook(0);
+
+        assertThat(books.size(), is(0));
+    }
+
+    @Test
+    public void shouldCheckoutBookWhenMultipleBooks() {
+        books.add(bookOne);
+        books.add(bookTwo);
+
+        library.checkoutBook(1);
+
+        assertThat(books.get(0), is(bookOne));
+
     }
 }

@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.command.CheckoutBookCommand;
 import com.twu.biblioteca.command.Command;
 import com.twu.biblioteca.command.ListBooksCommand;
 import com.twu.biblioteca.command.QuitCommand;
@@ -18,14 +19,15 @@ public class Main {
         PrintStream printStream = System.out;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        Library library = new Library(bookList(), printStream);
-
-
         InputReader inputReader = new InputReader(bufferedReader);
+        Library library = new Library(bookList(), printStream, inputReader);
+
+
         ApplicationState applicationState = new ApplicationState();
         Map<Integer, Command> commandMap = new HashMap<>();
         commandMap.put(1, new ListBooksCommand("List Books", library));
         commandMap.put(2, new QuitCommand("Quit", applicationState));
+        commandMap.put(3, new CheckoutBookCommand("Check Out Book", library, printStream, inputReader));
 
         Menu menu = new Menu(printStream, inputReader, commandMap);
 
