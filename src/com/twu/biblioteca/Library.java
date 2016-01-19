@@ -34,6 +34,13 @@ public class Library {
     }
 
     public void checkoutBook(int bookToRemove) {
-        books.remove(bookToRemove);
+
+        if(bookToRemove >= 0 && bookToRemove < books.size()) {
+            books.remove(bookToRemove);
+            printStream.println("Thank you! Enjoy the book");
+        }
+        else {
+            printStream.println("That book is not available.");
+        }
     }
 }

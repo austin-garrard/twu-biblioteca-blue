@@ -74,4 +74,22 @@ public class LibraryTest {
         assertThat(books.get(0), is(bookOne));
 
     }
+
+    @Test
+    public void shouldPrintSuccessMessageWhenCheckoutOutBook() {
+        books.add(bookOne);
+
+        library.checkoutBook(0);
+
+        verify(printStream).println("Thank you! Enjoy the book");
+    }
+
+    @Test
+    public void shouldPrintNotAvailableWhenInvalidBookNumber() {
+        books.add(bookOne);
+
+        library.checkoutBook(1);
+
+        verify(printStream).println("That book is not available.");
+    }
 }
