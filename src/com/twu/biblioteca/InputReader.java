@@ -16,6 +16,8 @@ public class InputReader {
             option = Integer.parseInt(bufferedReader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            return -1;
         }
 
         return option;

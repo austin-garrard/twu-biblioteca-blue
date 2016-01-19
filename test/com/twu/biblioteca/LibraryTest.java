@@ -11,7 +11,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class LibraryTest {
 
@@ -21,6 +20,7 @@ public class LibraryTest {
     Book bookOne;
     Book bookTwo;
     private InputReader inputReader;
+    private BooksList booksList;
 
     @Before
     public void setup() {
@@ -30,30 +30,9 @@ public class LibraryTest {
         bookTwo = mock(Book.class);
 
         books = new ArrayList<>();
-        library = new Library(books, printStream, inputReader);
+        booksList = new BooksList(books, printStream);
+        library = new Library(booksList, printStream);
     }
-
-    @Test
-    public void shouldReturnOneFormattedBooksStringWhenOnlyOneBook() {
-        books.add(bookOne);
-
-        library.bookList();
-
-        verify(bookOne).formattedDetails();
-    }
-
-
-    @Test
-    public void shouldReturnSecondFormattedBookWhenMultipleBooksExist() {
-        books.add(bookOne);
-        books.add(bookTwo);
-
-        library.bookList();
-
-        verify(bookTwo).formattedDetails();
-    }
-
-
 
     @Test
     public void shouldCheckoutBookWhenSingleBook() {

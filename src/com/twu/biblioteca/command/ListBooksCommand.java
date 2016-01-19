@@ -1,19 +1,19 @@
 package com.twu.biblioteca.command;
 
-import com.twu.biblioteca.Library;
-import com.twu.biblioteca.command.Command;
+import com.twu.biblioteca.BooksList;
 
 public class ListBooksCommand extends Command {
 
-    private Library library;
 
-    public ListBooksCommand(String name, Library library) {
+    private BooksList booksList;
+
+    public ListBooksCommand(String name, BooksList booksList) {
         super(name);
-        this.library = library;
+        this.booksList = booksList;
     }
 
     @Override
     public void execute() {
-        library.bookList();
+        booksList.print();
     }
 }

@@ -1,6 +1,7 @@
 package com.twu.biblioteca.command;
 
 
+import com.twu.biblioteca.BooksList;
 import com.twu.biblioteca.InputReader;
 import com.twu.biblioteca.Library;
 import org.junit.Before;
@@ -20,13 +21,15 @@ public class CheckoutBookCommandTest {
     Library library;
     private InputReader inputReader;
     private CheckoutBookCommand checkoutBookCommand;
+    private BooksList booksList;
 
     @Before
     public void setup() {
         printStream = mock(PrintStream.class);
         inputReader = mock(InputReader.class);
         library =mock(Library.class);
-        checkoutBookCommand= new CheckoutBookCommand("checkout", library, printStream, inputReader);
+        booksList = mock(BooksList.class);
+        checkoutBookCommand= new CheckoutBookCommand("checkout", library, printStream, inputReader, booksList);
     }
 
     @Test
@@ -38,7 +41,7 @@ public class CheckoutBookCommandTest {
     @Test
     public void shouldDisplayBookListWhenCheckingOutBook() {
         checkoutBookCommand.execute();
-        verify(library).bookList();
+        verify(booksList).print();
     }
 
     @Test

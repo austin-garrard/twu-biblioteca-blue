@@ -20,14 +20,16 @@ public class Main {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         InputReader inputReader = new InputReader(bufferedReader);
-        Library library = new Library(bookList(), printStream, inputReader);
+        BooksList booksList = new BooksList(bookList(), printStream);
+        Library library = new Library(booksList, printStream);
 
 
         ApplicationState applicationState = new ApplicationState();
         Map<Integer, Command> commandMap = new HashMap<>();
-        commandMap.put(1, new ListBooksCommand("List Books", library));
+
+        commandMap.put(1, new ListBooksCommand("List Books", booksList));
         commandMap.put(2, new QuitCommand("Quit", applicationState));
-        commandMap.put(3, new CheckoutBookCommand("Check Out Book", library, printStream, inputReader));
+        commandMap.put(3, new CheckoutBookCommand("Check Out Book", library, printStream, inputReader, booksList));
 
         Menu menu = new Menu(printStream, inputReader, commandMap);
 
